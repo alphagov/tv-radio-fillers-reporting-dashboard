@@ -1,6 +1,7 @@
 /* Global */
 body {
   background-color: #eaedef;
+  color: #0b0c0c;
 }
 a, a:visited {
   color: #2e3191;
@@ -41,6 +42,13 @@ body h2 {
   font-size: 20px;
   font-weight: 400;
   text-transform: uppercase;
+}
+
+.breadcrumbs {
+  padding: 10px 0 5px 20px;
+}
+.breadcrumbs a, .breadcrumbs a:visited {
+  color: #0b0c0c;
 }
 
 .button {

@@ -1,0 +1,17 @@
+<div class="container">
+  
+  <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
+  
+  <div class="row">
+    <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Import</h1>
+  </div>
+  
+  <div class="row">
+    <form enctype="multipart/form-data" encoding="multipart/form-data" method="post" action="/<%= mode%>/import">
+      <input type="file" name="datafile" size="100">
+      <button type="submit" name="action" value="send">Send</button>
+    </form>
+  </div>
+</div>
+  
+

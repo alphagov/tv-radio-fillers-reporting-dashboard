@@ -81,6 +81,9 @@ body h2 {
 .button-red {
   background-color: #b10e1e;
 }
+a.button:visited {
+  color: #fff;
+}
 
 .inline {
   display: inline;

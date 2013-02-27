@@ -1,4 +1,5 @@
 .project
+Gemfile.lock
 
 # OSX flob
 .DS_Store

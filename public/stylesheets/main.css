@@ -9,6 +9,10 @@ a, a:visited {
 html, body, button, input, table, td, th {
   font-family: "nta","GDS-Regular",sans-serif;
 }
+body h1 img {
+  margin-right: 20px;
+  vertical-align:middle;
+}
 body h2 {
   font-size: 16px;
   font-size: 1.6rem;

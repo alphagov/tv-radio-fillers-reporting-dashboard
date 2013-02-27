@@ -3,7 +3,7 @@
   <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
   
   <div class="row">
-    <h1 class="inline">Dashboard</h1>
+    <h1 class="inline"><img src="images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Dashboard</h1>
     <a href="/<%= mode %>/import" class="button button-red right m-right">Import data</a>
     <a href="/<%= mode %>/reports" class="button right m-right">Generate Reports</a>    
   </div>

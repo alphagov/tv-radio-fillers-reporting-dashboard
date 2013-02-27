@@ -1,7 +1,7 @@
 require 'rake/testtask'
 
 Rake::TestTask.new do |t|
-  t.test_files = FileList['tests/routes/*.rb', 'tests/helpers/*.rb']
+  t.test_files = FileList['tests/routes/*.rb', 'tests/helpers/*.rb', 'tests/models/*.rb']
   t.verbose = true
 end
 

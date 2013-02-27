@@ -1,0 +1,7 @@
+<% if !breadcrumbs.nil? && breadcrumbs.length > 0 %>
+<div class="row breadcrumbs">
+  <% breadcrumbs.each_with_index do |breadcrumb, i| %>
+    <%= i != 0? " > " : "" %><a href="<%= breadcrumb[:link] %>"><%= breadcrumb[:label] %></a>
+  <% end %>
+</div>
+<% end %>

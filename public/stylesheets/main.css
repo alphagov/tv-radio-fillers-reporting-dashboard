@@ -1,3 +1,4 @@
+/* Global */
 body {
   background-color: #eaedef;
 }
@@ -7,7 +8,6 @@ a, a:visited {
 html, body, button, input, table, td, th {
   font-family: "nta","GDS-Regular",sans-serif;
 }
-
 body h2 {
   font-size: 16px;
   font-size: 1.6rem;
@@ -16,12 +16,13 @@ body h2 {
   text-transform: none;
 }
 
+/* cssgrid overides and additions */
 .row {
-  padding-top: 15px;
-  padding-bottom: 10px;
+  padding: 15px 0 10px 20px;
   background-color: #fff;
 }
 
+/* General */
 .global-header {
   background-color: #0b0c0c;
   padding: 10px 0 10px 20px;
@@ -42,6 +43,43 @@ body h2 {
   text-transform: uppercase;
 }
 
-.category-select {
+.button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 0 #000;
+  -moz-box-shadow: 0 3px 0 #000;
+  box-shadow: 0 3px 0 #000;
+  font-weight: 400;
+  overflow: visible;
+  font-size: 1.1rem;
+  line-height: 0.66667;
+  font-weight: 400;
+  text-transform: none;
+  padding: 0.45em 0.5em 0.45em 0.5em;
+  display: inline-block;
+  color: #fff;
+  background-color: #008270;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  top: -3px;
+  cursor: pointer;
+}
+.button-red {
+  background-color: #b10e1e;
+}
+
+.inline {
+  display: inline;
+} 
+.centered {
   text-align: center;
+}
+.right {
+  clear:left;
+  float:right;
+}
+.m-right {
+  margin-right:30px;
 }

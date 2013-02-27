@@ -1,0 +1,47 @@
+body {
+  background-color: #eaedef;
+}
+a, a:visited {
+  color: #2e3191;
+}
+html, body, button, input, table, td, th {
+  font-family: "nta","GDS-Regular",sans-serif;
+}
+
+body h2 {
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  font-weight: 300;
+  text-transform: none;
+}
+
+.row {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background-color: #fff;
+}
+
+.global-header {
+  background-color: #0b0c0c;
+  padding: 10px 0 10px 20px;
+}
+.global-header a, .global-header a:visited {
+  color: #fff;
+  text-decoration:none;
+}
+.global-header a img {
+  width: 36px; height: 30px;
+  margin-right:10px;
+  vertical-align: bottom;
+}
+.global-header a h1 {
+  display: inline;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.category-select {
+  text-align: center;
+}

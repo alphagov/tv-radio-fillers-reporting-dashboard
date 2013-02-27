@@ -1,8 +1,8 @@
 
 get '/tv/reports' do
-  erb :import, :locals => { :mode => "tv" }
+  erb :reports, :locals => { :mode => "tv" }
 end
 
 get '/radio/reports' do
-  erb :import, :locals => { :mode => "radio" }
+  erb :reports, :locals => { :mode => "radio" }
 end

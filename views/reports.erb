@@ -1,0 +1,15 @@
+<div class="container">
+  
+  <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
+  
+  <div class="row">
+    <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Reports</h1>
+  </div>
+  
+  <div class="row centered">
+    <div>
+      <h3>TV Reports - not for profit 2012</h3>
+      <img src="images/sample_chart1.png">
+    </div>
+  </div>
+</div>

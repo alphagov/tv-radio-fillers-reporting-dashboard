@@ -14,4 +14,9 @@ class Test::Unit::TestCase
   def app
     Sinatra::Application
   end
+  
+  def it_ok(url)
+    get url
+    assert last_response.ok?
+  end
 end

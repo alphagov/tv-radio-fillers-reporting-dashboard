@@ -1,5 +1,7 @@
 .project
 Gemfile.lock
 
+.~lock*
+
 # OSX flob
 .DS_Store

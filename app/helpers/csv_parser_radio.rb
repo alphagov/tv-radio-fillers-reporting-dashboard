@@ -8,7 +8,11 @@ class CsvParserRadio
   
   DATE_FORMAT = '%d-%b-%y'
   CSV_PARSER_RADIO_LOG = "logs/CsvParserRadio.log"
-  
+
+  INSTRUCTION_TEXT =  'The radio CSV parser assumes the radio filler data comes in the following '\
+                      'format: "TITLE,CHANNEL,IMPACT,DATE,TIME", '\
+                      'e.g. "CBO-009-040 ROY UK only FCO website,Viking FM,15596,07-Jan-13,12:40"'
+
   def parse_radio_row(row)
     raise ArgumentError, "Too few rows", caller if row.length < 4
 

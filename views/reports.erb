@@ -6,10 +6,30 @@
     <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Reports</h1>
   </div>
   
-  <div class="row centered">
-    <div>
-      <h3>TV Reports - not for profit 2012</h3>
-      <img src="/images/sample_chart1.png">
-    </div>
+  <div class="row">
+    <form action="/<%= mode %>/generate-report" method="get" class="report-criteria">
+      <fieldset>
+        <div class="legend">
+          <legend class="">Generate Report</legend>
+        </div>
+        <div class="control-group">
+          <label for="filler_name">Filler Name</label>
+          <div class="controls">
+            <input type="text" id="filler_name" name="filler_name" placeholder="e.g. Pass on Some Immunity">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="station_name">Station Name</label>
+          <div class="controls">
+            <input type="text" id="station_name" name="station_name" placeholder="e.g. CTV, Viking FM">
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="button">Generate Report</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
   </div>
 </div>

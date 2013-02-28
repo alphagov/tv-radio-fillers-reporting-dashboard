@@ -55,7 +55,7 @@ body h2 {
   color: #0b0c0c;
 }
 
-.button {
+a.button {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -78,11 +78,32 @@ body h2 {
   top: -3px;
   cursor: pointer;
 }
-.button-red {
+a.button-red {
   background-color: #b10e1e;
 }
 a.button:visited {
   color: #fff;
+}
+input.button,
+button.button {
+  font-size: 1.1em;
+  font-weight: 300;
+  text-transform: none;
+  display: inline;
+  margin: 0;
+  padding: 0.25em 0.5em;
+  position: static;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-color: #008270;
+  color: #fff;
+  border: none;
 }
 
 .inline {
@@ -120,4 +141,40 @@ a.button:visited {
   margin-bottom:10px;
   padding:.5em;
   margin-right: 50px;
+}
+
+/* form */
+form.report-criteria {
+  margin: 0 0 20px;
+}
+form.report-criteria fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+form.report-criteria fieldset legend {
+  display: block;
+  width: 95%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 40px;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+form.report-criteria .control-group {
+  margin-bottom: 20px;
+}
+form.report-criteria .control-group label {
+  float: left;
+  width: 160px;
+  padding-top: 5px;
+  text-align: right;
+}
+form.report-criteria .controls {
+  margin-left: 180px;
+}
+form.report-criteria input {
+  width: 200px;
 }

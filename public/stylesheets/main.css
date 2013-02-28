@@ -98,3 +98,15 @@ a.button:visited {
 .m-right {
   margin-right:30px;
 }
+
+.flash
+{
+  -moz-border-radius:5px;
+  border-radius:5px;
+  background:#FFE9D2;
+  border:1px solid #FF931E;
+  line-height:1.3;
+  margin-bottom:10px;
+  padding:.5em;
+  width:400px;
+}

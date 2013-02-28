@@ -13,6 +13,8 @@
   <div class="row"><p class="flash"><%= params[:notice] %></p></div>
   <% end %>
   
+  <div class="row"><p class="instruction"><%= mode == 'tv' ? CsvParserTv::INSTRUCTION_TEXT : CsvParserRadio::INSTRUCTION_TEXT %></p></div>
+  
   <div class="row">
     <form enctype="multipart/form-data" encoding="multipart/form-data" method="post" action="/<%= mode%>/import">
       <input type="file" name="datafile" size="100">
@@ -22,7 +24,7 @@
   
   <div class="row">
     <h2>Clear all <%= mode%> data</h2>
-    <p class="warning">WARNING - This will clear all <%= mode%> data in the system</p>
+    <p class="warning">WARNING - This will clear all <%= mode %> data in the system</p>
     <form enctype="multipart/form-data" encoding="multipart/form-data" method="post" action="/<%= mode%>/import/clear">
       <button type="submit" name="action" value="send">Clear all data</button>
     </form>

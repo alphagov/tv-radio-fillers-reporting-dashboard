@@ -1,5 +1,7 @@
 require_relative '../test_helper.rb'
 require_relative '../models/fillerEntry_tests.rb'
+require_relative '../helpers/csv_parser_radio_test.rb'
+require_relative '../helpers/csv_parser_tv_test.rb'
 
 class ImportTest < Test::Unit::TestCase
   
@@ -13,6 +15,20 @@ class ImportTest < Test::Unit::TestCase
     get "/#{mode}/import"
     assert last_response.ok?
     assert last_response.body.include?('<input type="file"')
+  end
+  
+  def test_tv_import_post
+    FillerEntry.delete_all(type: 'tv')
+    
+    post "/tv/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserTvTest::SAMPLE_FILE_FULL_PATH, "text/csv")
+    assert FillerEntry.where(type: 'tv').count == 10
+  end
+  
+  def test_radio_import_post
+    FillerEntry.delete_all(type: 'radio')
+    
+    post "/radio/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserRadioTest::SAMPLE_FILE_FULL_PATH, "text/csv")
+    assert FillerEntry.where(type: 'radio').count == 12
   end
   
   def test_tv_import_clear

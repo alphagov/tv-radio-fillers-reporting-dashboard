@@ -6,14 +6,13 @@ require 'csv'
 class CsvParserRadioTest < Test::Unit::TestCase
   
   DATE_FORMAT = '%d-%b-%y'
-
+  SAMPLE_FILE_FULL_PATH = "tests/helpers/csv_samples/radio_fillers_sample.csv"
+  
   def setup
     Mongoid.load!("mongoid.yml", :test)
     FillerEntry.delete_all
     
     @csv_parser = CsvParserRadio.new
-    
-    @sample_file_full_path = "tests/helpers/csv_samples/radio_fillers_sample.csv"
   end
   
   def test_parse_radio_row
@@ -44,7 +43,7 @@ class CsvParserRadioTest < Test::Unit::TestCase
   end
   
   def test_parse_radio_sample_file
-    @csv_parser.parse_radio_file(@sample_file_full_path)
+    @csv_parser.parse_radio_file(SAMPLE_FILE_FULL_PATH)
     
     fillers = FillerEntry.where(type: "radio")
     assert fillers.count == 12

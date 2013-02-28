@@ -6,14 +6,13 @@ require 'csv'
 class CsvParserTvTest < Test::Unit::TestCase
   
   DATE_FORMAT = '%d-%b-%y'
-
+  SAMPLE_FILE_FULL_PATH = "tests/helpers/csv_samples/tv_fillers_sample.csv"
+  
   def setup
     Mongoid.load!("mongoid.yml", :test)
     FillerEntry.delete_all
     
     @csv_parser = CsvParserTv.new
-    
-    @sample_file_full_path = "tests/helpers/csv_samples/tv_fillers_sample.csv"
   end
 
   def test_parse_tv_row
@@ -43,7 +42,7 @@ class CsvParserTvTest < Test::Unit::TestCase
   end
   
   def test_parse_tv_sample_file
-    @csv_parser.parse_tv_file(@sample_file_full_path)
+    @csv_parser.parse_tv_file(SAMPLE_FILE_FULL_PATH)
     
     fillers = FillerEntry.where(type: "tv")
     assert fillers.count == 10

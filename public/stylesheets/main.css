@@ -23,7 +23,7 @@ body h2 {
 
 /* cssgrid overides and additions */
 .row {
-  padding: 15px 0 10px 20px;
+  padding: 15px 20px 10px 20px;
   background-color: #fff;
 }
 
@@ -48,9 +48,6 @@ body h2 {
   text-transform: uppercase;
 }
 
-.breadcrumbs {
-  padding: 10px 0 5px 20px;
-}
 .breadcrumbs a, .breadcrumbs a:visited {
   color: #0b0c0c;
 }
@@ -177,4 +174,21 @@ form.report-criteria .controls {
 }
 form.report-criteria input {
   width: 200px;
+}
+
+/* table */
+table.data-table {
+  text-align: left;
+  border: 1px solid #d6d6d6;
+  border-collapse: collapse;
+  border-left: 0;
+  border-spacing: 0;
+}
+table.data-table tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+table.data-table thead tr th,
+table.data-table tbody tr td {
+  border: 1px solid #d6d6d6;
+  padding: 8px;
 }

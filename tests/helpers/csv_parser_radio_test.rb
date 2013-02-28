@@ -29,7 +29,7 @@ class CsvParserRadioTest < Test::Unit::TestCase
     assert filler.filler_name == sample_row[0]
   end
   
-  def def test_parse_radio_row_too_few_rows
+  def test_parse_radio_row_too_few_rows
     invalid_row = ["Absolute 70s", "2767", "17-Jan-13", "21:34"]
     
     exception = assert_raise(ArgumentError) { @csv_parser.parse_radio_row(invalid_row) }

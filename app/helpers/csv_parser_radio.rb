@@ -14,7 +14,7 @@ class CsvParserRadio
                       'e.g. "CBO-009-040 ROY UK only FCO website,Viking FM,15596,07-Jan-13,12:40"'
 
   def parse_radio_row(row)
-    raise ArgumentError, "Too few rows", caller if row.length < 4
+    raise ArgumentError, "Too few rows", caller if row.length < 5
 
     date_string = row[3]
     date = nil

@@ -22,7 +22,7 @@ class CsvParserRadioTest < Test::Unit::TestCase
     
     assert !filler.nil?
     assert filler.type == "radio"
-    assert filler.date == DateTime.strptime(sample_row[3], DATE_FORMAT)
+    assert filler.date.strftime('%d/%m/%Y') == DateTime.new(2013, 01, 17).strftime('%d/%m/%Y')
     assert filler.time_of_day == sample_row[4]
     assert filler.station_name == sample_row[1]
     assert filler.impact == sample_row[2]

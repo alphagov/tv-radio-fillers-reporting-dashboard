@@ -7,6 +7,10 @@ class CsvParserRadioTest < Test::Unit::TestCase
   
   DATE_FORMAT = '%d-%b-%y'
   
+  INSTRUCTION_TEXT =  'The radio CSV parser assumes the radio filler data comes in the following '\
+                      'format: "TITLE,CHANNEL,IMPACT,DATE,TIME", '\
+                      'e.g. "CBO-009-040 ROY UK only FCO website,Viking FM,15596,07-Jan-13,12:40"'
+
   def setup
     Mongoid.load!("mongoid.yml", :test)
     FillerEntry.delete_all

@@ -11,6 +11,10 @@ class FillerEntryTest < Test::Unit::TestCase
     FillerEntryTest.add_samples
   end
   
+  def teardown
+    FillerEntry.delete_all
+  end
+  
   def self.add_samples
     FillerEntry.new(:type => "tv", :date => Date.new, :time_of_day => "00:01", :station_name => "Test1").save
     FillerEntry.new(:type => "radio",:date => Date.new, :time_of_day => "00:02", :station_name => "Test2").save

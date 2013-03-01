@@ -14,6 +14,10 @@ class CsvParserTvTest < Test::Unit::TestCase
     
     @csv_parser = CsvParserTv.new
   end
+  
+  def teardown
+    FillerEntry.delete_all
+  end
 
   def test_parse_tv_row
     sample_row = ["06/12/2012", "01:47", "S COI: ROAD SAFETY - DITTIES 0147 0:40 COI/PSFF088/040 Y", "CTV"]
@@ -42,10 +46,14 @@ class CsvParserTvTest < Test::Unit::TestCase
   end
   
   def test_parse_tv_sample_file
-    @csv_parser.parse_tv_file(SAMPLE_FILE_FULL_PATH)
+    CsvParserTvTest.load_sample_file
     
     fillers = FillerEntry.where(type: "tv")
     assert fillers.count == 10
+  end
+  
+  def self.load_sample_file
+    CsvParserTv.new.parse_tv_file(SAMPLE_FILE_FULL_PATH)
   end
 
 end

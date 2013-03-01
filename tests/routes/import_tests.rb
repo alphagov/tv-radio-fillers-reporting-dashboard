@@ -5,6 +5,10 @@ require_relative '../helpers/csv_parser_tv_test.rb'
 
 class ImportTest < Test::Unit::TestCase
   
+  def teardown
+    FillerEntry.delete_all
+  end
+  
   def test_tv_it_contains_upload_control
     it_contains_upload_control("tv")
   end

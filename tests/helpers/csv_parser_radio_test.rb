@@ -15,6 +15,10 @@ class CsvParserRadioTest < Test::Unit::TestCase
     @csv_parser = CsvParserRadio.new
   end
   
+  def teardown
+    FillerEntry.delete_all
+  end
+  
   def test_parse_radio_row
     sample_row = ["CB00003030 Dance On 30s", "Absolute 70s", "2767", "17-Jan-13", "21:34"]
     filler = @csv_parser.parse_radio_row(sample_row)
@@ -43,10 +47,14 @@ class CsvParserRadioTest < Test::Unit::TestCase
   end
   
   def test_parse_radio_sample_file
-    @csv_parser.parse_radio_file(SAMPLE_FILE_FULL_PATH)
+    CsvParserRadioTest.load_sample_file
     
     fillers = FillerEntry.where(type: "radio")
     assert fillers.count == 12
+  end
+  
+  def self.load_sample_file
+    CsvParserRadio.new.parse_radio_file(SAMPLE_FILE_FULL_PATH)
   end
 
 end

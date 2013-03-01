@@ -10,3 +10,7 @@ helpers Breadcrumbs
 configure do
   Mongoid.load!('mongoid.yml')
 end
+
+def is_param_not_nil_empty(param_name)
+  !params[param_name].nil? && params[param_name] != ''
+end

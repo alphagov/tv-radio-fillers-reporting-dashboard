@@ -109,6 +109,10 @@ button.button {
 .centered {
   text-align: center;
 }
+.left {
+  clear:right;
+  float:left;
+}
 .right {
   clear:left;
   float:right;

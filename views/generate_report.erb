@@ -8,6 +8,7 @@
   
   <% if !data.nil? && data.has_key?(:results) && !data[:results].nil? && data[:results].length > 0 %>
   <div class="row">
+    <div class="left"><a href="<%= "/api/#{mode}/download-csv?#{request.query_string}" %>">Download Spreadsheet</a></div>
     <%= erb :"partials/paging", :locals => { :page => data[:page], :page_count => data[:page_count] } %>
   </div>
   <div class="row">

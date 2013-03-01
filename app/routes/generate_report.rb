@@ -10,7 +10,7 @@ end
 def query_for_params(mode, params)
   page_size = 50
   page = is_param_not_nil_empty('page') ? params['page'].to_i : 1
-  puts page
+
   criteria = FillerEntry.where(type: mode)
 
   criteria = criteria.where(filler_name: /#{params['filler_name']}/) if is_param_not_nil_empty('filler_name')

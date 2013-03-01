@@ -1,7 +1,9 @@
 require 'mongoid'
+require 'mongoid/pagination'
 
 class FillerEntry
   include Mongoid::Document
+  include Mongoid::Pagination
   
   field :type
   field :date

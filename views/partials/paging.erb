@@ -1,0 +1,22 @@
+<%
+  url_without_page_param = remove_param_from_url(request.fullpath, 'page')
+  url_without_page_param += url_without_page_param.include?('?') ? '&' : '?'
+  page_range_count = 1
+  page_range = page-page_range_count..page+page_range_count
+  page_range = page_range.reject {|i| i < 1}.reject {|i| i > page_count}
+%>
+<div class="pagination">
+  <ul>
+    <li><a <% if page - 1 > 0 %>href="<%= url_without_page_param + "page=#{page - 1}" %>"<% end %>>Prev</a></li>
+    <% if !page_range.include?(1) %>
+    <li><a href="<%= url_without_page_param + "page=1" %>">1...</a></li>
+    <% end %>
+    <% page_range.each do |page_index| %>
+    <li><a href="<%= url_without_page_param + "page=#{page_index}" %>" <% if page == page_index %>class="selected"<% end %>><%= page_index %></a></li>
+    <% end %>
+    <% if !page_range.include?(page_count) %>
+    <li><a href="<%= url_without_page_param + "page=#{page_count}" %>">...<%= page_count %></a></li>
+    <% end %>
+    <li><a <% if page < page_count %>href="<%= url_without_page_param + "page=#{page + 1}" %>"<% end %>>Next</a></li>
+  </ul>
+</div>

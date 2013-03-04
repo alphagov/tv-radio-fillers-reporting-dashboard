@@ -6,7 +6,7 @@ class FillerEntry
   include Mongoid::Pagination
   
   field :type
-  field :date
+  field :date, :type => DateTime
   field :time_of_day
   field :station_name
   field :impact

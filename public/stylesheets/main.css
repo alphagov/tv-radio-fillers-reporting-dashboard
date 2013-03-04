@@ -179,6 +179,9 @@ form.report-criteria .controls {
 form.report-criteria input {
   width: 200px;
 }
+form.report-criteria input.date-picker {
+  width: 100px;
+}
 
 /* table */
 table.data-table {

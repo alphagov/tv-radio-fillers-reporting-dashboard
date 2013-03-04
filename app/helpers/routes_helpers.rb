@@ -21,7 +21,16 @@ module RoutesHelpers
     criteria = criteria.where(filler_name: /#{params['filler_name']}/) if is_param_not_nil_empty('filler_name')
     criteria = criteria.where(station_name: /#{params['station_name']}/) if is_param_not_nil_empty('station_name')
 
-    criteria
+    if is_param_not_nil_empty('from_date') && is_param_not_nil_empty('to_date')
+      begin
+        from_date = DateTime.strptime(params['from_date'], '%d/%m/%Y')
+        to_date = DateTime.strptime(params['to_date'], '%d/%m/%Y')
+        criteria = criteria.where(:date => { :$gte => from_date, :$lte => to_date })
+      rescue
+      end
+    end
+
+    criteria.asc(:date, :time_of_day)
   end
 
   def query_for_params_with_paging(mode, params)

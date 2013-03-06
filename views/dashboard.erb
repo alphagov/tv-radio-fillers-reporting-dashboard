@@ -4,8 +4,34 @@
   
   <div class="row">
     <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Dashboard</h1>
-    <a href="/<%= mode %>/import" class="button button-red right m-right">Import data</a>
-    <a href="/<%= mode %>/reports" class="button right m-right">Generate Reports</a>    
+    <a href="/<%= mode %>/import" class="button button-red right">Import data</a>
+  </div>
+  
+  <div class="row centered">
+        
+  </div>
+  
+  <div class="row">
+    <h2 class="inline">Reports</h2>
+    <a href="/<%= mode %>/reports" class="button right">Generate Reports</a>
+    <table id="report-table" class="data-table" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Report</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% REPORTS.each do |report| %>
+        <tr>
+          <td><%= report[:name] %></td>
+          <td><a href="#">previous month</a></td>
+          <td><a href="#">previous year</a></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>   
   </div>
 </div>
   

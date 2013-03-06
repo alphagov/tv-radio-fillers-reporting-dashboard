@@ -3,6 +3,18 @@ require 'uri'
 
 module RoutesHelpers
 
+  REPORTS = [
+    { :name => "2B: Client Reports, Transmission by Station and Time of Day" },
+    { :name => "2C: Client Reports, Transmission by Time of Day" },
+    { :name => "3A: Client Reports, Transmission by Filler and Station" },
+    { :name => "4A: Summary Reports, Client by Station Type and Time of Day" },
+    { :name => "4B: Summary Reports, Client by Station Type, Theme and Filler" },
+    { :name => "5B: Top Terrestial Transmissions" },
+    { :name => "M1: Clearance Expiry List" },
+    { :name => "Client Report Set per Client" },
+    { :name => "Annual Tracking by Client" }
+  ]
+
   def is_param_not_nil_empty(param_name)
     !params[param_name].nil? && params[param_name] != ''
   end

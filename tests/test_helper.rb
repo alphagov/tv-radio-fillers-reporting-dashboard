@@ -17,6 +17,6 @@ class Test::Unit::TestCase
   
   def it_ok(url)
     get url
-    assert last_response.ok?
+    assert(last_response.ok?, "Bad response for url: #{url}")
   end
 end

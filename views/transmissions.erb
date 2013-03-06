@@ -5,7 +5,43 @@
   <div class="row">
     <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Transmissions</h1>
   </div>
-  
+
+  <div class="row">
+    <form action="/<%= mode %>/transmissions" method="get" class="report-criteria">
+      <fieldset>
+        <div class="legend">
+          <legend class="">Filter</legend>
+        </div>
+        <div class="control-group">
+          <label for="filler_name">Filler Name</label>
+          <div class="controls">
+            <input type="text" id="filler_name" name="filler_name" value="<%= params['filler_name'] %>" placeholder="e.g. Pass on Some Immunity">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="station_name">Station Name</label>
+          <div class="controls">
+            <input type="text" id="station_name" name="station_name" value="<%= params['station_name'] %>" placeholder="e.g. CTV, Viking FM">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="from_date">Date Range</label>
+          <div class="controls">
+            From&nbsp;
+            <input type="text" id="from_date" name="from_date" value="<%= params['from_date'] %>" class="date-picker" placeholder="e.g. 01/01/2013">
+            &nbsp;To&nbsp;
+            <input type="text" id="to_date" name="to_date" value="<%= params['to_date'] %>" class="date-picker"  placeholder="e.g. 31/01/2013">
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <button type="submit" class="button">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
   <% if !data.nil? && data.has_key?(:results) && !data[:results].nil? && data[:results].length > 0 %>
   <div class="row">
     <div class="left"><a href="<%= "/api/#{mode}/download-csv?#{request.query_string}" %>">Download Spreadsheet</a></div>

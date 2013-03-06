@@ -50,11 +50,11 @@ module RoutesHelpers
     page = is_param_not_nil_empty('page') ? params['page'].to_i : 1
     
     criteria = query_for_params(mode, params)
-    
+
     {
       :page => page,
-      :page_count => ((criteria.count)*1.0 / page_size).ceil,
-      :results => criteria.paginate(:page => page, :limit => page_size)    
+      :page_count => (criteria.count*1.0 / page_size).ceil,
+      :results => criteria.paginate(:page => page, :limit => page_size)
     }
   end
 end

@@ -1,4 +1,5 @@
 require 'sinatra'
+require "sinatra/reloader" if development?
 require 'uri'
 
 Dir["./app/models/*.rb"].each { |file| require file }

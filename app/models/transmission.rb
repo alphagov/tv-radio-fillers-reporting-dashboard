@@ -1,10 +1,10 @@
 require 'mongoid'
 require 'mongoid/pagination'
 
-class FillerEntry
+class Transmission
   include Mongoid::Document
   include Mongoid::Pagination
-  
+
   field :type
   field :date, :type => DateTime
   field :time_of_day

@@ -28,11 +28,11 @@ post '/radio/import' do
 end
 
 post '/tv/import/clear' do
-  FillerEntry.delete_all(type: 'tv')
+  Transmission.delete_all(type: 'tv')
   redirect "/tv/import?notice=#{URI.escape('Cleared all TV filler entries')}"
 end
 
 post '/radio/import/clear' do
-  FillerEntry.delete_all(type: 'radio')
+  Transmission.delete_all(type: 'radio')
   redirect "/radio/import?notice=#{URI.escape('Cleared all Radio filler entries')}"
 end

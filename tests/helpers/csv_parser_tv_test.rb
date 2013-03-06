@@ -1,5 +1,5 @@
 require_relative '../../app/helpers/csv_parser_tv.rb'
-require_relative '../../app/models/fillerEntry.rb'
+require_relative '../../app/models/transmission.rb'
 require 'test/unit'
 require 'csv'
 
@@ -10,13 +10,13 @@ class CsvParserTvTest < Test::Unit::TestCase
   
   def setup
     Mongoid.load!("mongoid.yml", :test)
-    FillerEntry.delete_all
+    Transmission.delete_all
     
     @csv_parser = CsvParserTv.new
   end
   
   def teardown
-    FillerEntry.delete_all
+    Transmission.delete_all
   end
 
   def test_parse_tv_row
@@ -48,7 +48,7 @@ class CsvParserTvTest < Test::Unit::TestCase
   def test_parse_tv_sample_file
     CsvParserTvTest.load_sample_file
     
-    fillers = FillerEntry.where(type: "tv")
+    fillers = Transmission.where(type: "tv")
     assert fillers.count == 10
   end
   

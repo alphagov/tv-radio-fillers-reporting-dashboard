@@ -3,7 +3,7 @@ require 'date'
 require "logger"
 require "fileutils"
 require_relative "date_parser.rb"
-require_relative "../models/fillerEntry.rb"
+require_relative "../models/transmission.rb"
 
 class CsvParserRadio
   include DateParser
@@ -19,7 +19,7 @@ class CsvParserRadio
  
     date = parse_date(row[3])
 
-    FillerEntry.new(
+    Transmission.new(
      :type => "radio",
      :date => date,
      :time_of_day => row[4],

@@ -1,12 +1,12 @@
 require_relative '../test_helper.rb'
-require_relative '../models/fillerEntry_tests.rb'
+require_relative '../models/transmission_tests.rb'
 require_relative '../helpers/csv_parser_radio_test.rb'
 require_relative '../helpers/csv_parser_tv_test.rb'
 
 class ImportTest < Test::Unit::TestCase
   
   def teardown
-    FillerEntry.delete_all
+    Transmission.delete_all
   end
   
   def test_tv_it_contains_upload_control
@@ -22,33 +22,33 @@ class ImportTest < Test::Unit::TestCase
   end
   
   def test_tv_import_post
-    FillerEntry.delete_all(type: 'tv')
+    Transmission.delete_all(type: 'tv')
     
     post "/tv/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserTvTest::SAMPLE_FILE_FULL_PATH, "text/csv")
-    assert FillerEntry.where(type: 'tv').count == 10
+    assert Transmission.where(type: 'tv').count == 10
   end
   
   def test_radio_import_post
-    FillerEntry.delete_all(type: 'radio')
+    Transmission.delete_all(type: 'radio')
     
     post "/radio/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserRadioTest::SAMPLE_FILE_FULL_PATH, "text/csv")
-    assert FillerEntry.where(type: 'radio').count == 12
+    assert Transmission.where(type: 'radio').count == 12
   end
   
   def test_tv_import_clear
-    FillerEntryTest.add_samples
+    TransmissionTest.add_samples
     
     post "/tv/import/clear"
-    assert FillerEntry.where(type: 'tv').count == 0
+    assert Transmission.where(type: 'tv').count == 0
     assert last_response.redirect?
     assert last_response.location.include?('/tv/import')
   end
   
   def test_radio_import_clear
-    FillerEntryTest.add_samples
+    TransmissionTest.add_samples
     
     post "/radio/import/clear"
-    assert FillerEntry.where(type: 'radio').count == 0
+    assert Transmission.where(type: 'radio').count == 0
     assert last_response.redirect?
     assert last_response.location.include?('/radio/import')
   end

@@ -1,5 +1,5 @@
 require_relative '../../app/helpers/csv_parser_radio.rb'
-require_relative '../../app/models/fillerEntry.rb'
+require_relative '../../app/models/transmission.rb'
 require 'test/unit'
 require 'csv'
 
@@ -10,13 +10,13 @@ class CsvParserRadioTest < Test::Unit::TestCase
   
   def setup
     Mongoid.load!("mongoid.yml", :test)
-    FillerEntry.delete_all
+    Transmission.delete_all
     
     @csv_parser = CsvParserRadio.new
   end
   
   def teardown
-    FillerEntry.delete_all
+    Transmission.delete_all
   end
   
   def test_parse_radio_row
@@ -49,7 +49,7 @@ class CsvParserRadioTest < Test::Unit::TestCase
   def test_parse_radio_sample_file
     CsvParserRadioTest.load_sample_file
     
-    fillers = FillerEntry.where(type: "radio")
+    fillers = Transmission.where(type: "radio")
     assert fillers.count == 12
   end
   

@@ -16,8 +16,8 @@ class TransmissionTest < Test::Unit::TestCase
   end
   
   def self.add_samples
-    Transmission.new(:type => "tv", :date => Date.new, :time_of_day => "00:01", :station_name => "Test1").save
-    Transmission.new(:type => "radio",:date => Date.new, :time_of_day => "00:02", :station_name => "Test2").save
+    Transmission.new(:type => "tv", :date => Date.new(2001,2,3), :time_of_day => "00:01", :filler_name => "filler1", :station_name => "Test1").save
+    Transmission.new(:type => "radio",:date => Date.new(2001,2,3), :time_of_day => "00:02", :filler_name => "filler2", :station_name => "Test2").save
   end
   
   def test_find_all_tv

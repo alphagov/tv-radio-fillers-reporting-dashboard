@@ -1,5 +1,6 @@
 require 'sinatra'
-require 'uri'
+require 'addressable/uri'
+require_relative '../../app/models/transmission.rb'
 
 module RoutesHelpers
 
@@ -15,25 +16,30 @@ module RoutesHelpers
     { :name => "Annual Tracking by Client" }
   ]
 
-  def is_param_not_nil_empty(param_name)
-    !params[param_name].nil? && params[param_name] != ''
+  def is_param_not_nil_empty(params, param_name)
+    !params.nil? && !params[param_name].nil? && params[param_name] != ''
   end
 
   def remove_param_from_url(url, param_name_to_remove)
-    uri = URI url
-    params = Rack::Utils.parse_query uri.query
-    params.delete param_name_to_remove
-    uri.query = params.to_param
-    uri.to_s
+    uri = Addressable::URI.parse(url)
+    
+    if !uri.query_values.nil?
+      params = uri.query_values
+      params.delete param_name_to_remove
+      uri.query_values = params
+      params.length > 0 ? uri.to_s : uri.to_s.gsub(/[?]$/, '')
+    else
+      uri.to_s
+    end
   end
 
   def query_for_params(mode, params)
     criteria = Transmission.where(type: mode)
   
-    criteria = criteria.where(filler_name: /#{params['filler_name']}/) if is_param_not_nil_empty('filler_name')
-    criteria = criteria.where(station_name: /#{params['station_name']}/) if is_param_not_nil_empty('station_name')
+    criteria = criteria.where(filler_name: /#{params['filler_name']}/) if is_param_not_nil_empty(params, 'filler_name')
+    criteria = criteria.where(station_name: /#{params['station_name']}/) if is_param_not_nil_empty(params, 'station_name')
 
-    if is_param_not_nil_empty('from_date') && is_param_not_nil_empty('to_date')
+    if is_param_not_nil_empty(params, 'from_date') && is_param_not_nil_empty(params, 'to_date')
       begin
         from_date = DateTime.strptime(params['from_date'], '%d/%m/%Y')
         to_date = DateTime.strptime(params['to_date'], '%d/%m/%Y')
@@ -47,7 +53,7 @@ module RoutesHelpers
 
   def query_for_params_with_paging(mode, params)
     page_size = 50
-    page = is_param_not_nil_empty('page') ? params['page'].to_i : 1
+    page = is_param_not_nil_empty(params, 'page') ? params['page'].to_i : 1
     
     criteria = query_for_params(mode, params)
 

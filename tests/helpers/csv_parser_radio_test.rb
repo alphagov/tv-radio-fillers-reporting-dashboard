@@ -19,9 +19,9 @@ class CsvParserRadioTest < Test::Unit::TestCase
     Transmission.delete_all
   end
   
-  def test_parse_radio_row
+  def test_parse_row
     sample_row = ["CB00003030 Dance On 30s", "Absolute 70s", "2767", "17-Jan-13", "21:34"]
-    filler = @csv_parser.parse_radio_row(sample_row)
+    filler = @csv_parser.parse_row(sample_row)
     
     assert !filler.nil?
     assert filler.type == "radio"
@@ -32,17 +32,17 @@ class CsvParserRadioTest < Test::Unit::TestCase
     assert filler.filler_name == sample_row[0]
   end
   
-  def test_parse_radio_row_too_few_rows
+  def test_parse_row_too_few_rows
     invalid_row = ["Absolute 70s", "2767", "17-Jan-13", "21:34"]
     
-    exception = assert_raise(ArgumentError) { @csv_parser.parse_radio_row(invalid_row) }
+    exception = assert_raise(ArgumentError) { @csv_parser.parse_row(invalid_row) }
     assert_equal("Too few rows", exception.message)
   end
   
-  def test_parse_radio_row_invalid_date
+  def test_parse_row_invalid_date
     invalid_row = ["CB00003030 Dance On 30s", "Absolute 70s", "2767", "01/31/2013", "21:34"]
     
-    exception = assert_raise(ArgumentError) { @csv_parser.parse_radio_row(invalid_row) }
+    exception = assert_raise(ArgumentError) { @csv_parser.parse_row(invalid_row) }
     assert_equal("Could not parse date: #{invalid_row[3]}", exception.message)
   end
   

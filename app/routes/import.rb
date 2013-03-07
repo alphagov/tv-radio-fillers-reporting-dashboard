@@ -3,7 +3,11 @@ get '/:mode/import' do
   erb :import, :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_radio([{ :label => "Import", :link => "/#{params[:mode]}/import"}]) }
 end
 
-post '/:mode/import' do
+get '/:mode/import/transmissions' do
+  erb :"import/import_transmissions", :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_radio([{ :label => "Import", :link => "/#{params[:mode]}/import"}, { :label => "Transmissions", :link => "/#{params[:mode]}/import/transmissions"}]) }
+end
+
+post '/:mode/import/transmissions' do
   content_type "text/plain"
   
   file_path = params['datafile'][:tempfile].path
@@ -13,7 +17,10 @@ post '/:mode/import' do
   File.exists?(csv_parser.log_file_path) ? File.read(csv_parser.log_file_path) : "Log not found"
 end
 
-post '/:mode/import/clear' do
+post '/:mode/import/transmissions/clear' do
+  content_type "text/plain"
+  
   Transmission.delete_all(type: params[:mode])
-  redirect "/#{params[:mode]}/import?notice=#{URI.escape('Cleared all ' + params[:mode] + ' transmission entries')}"
+  
+  "Cleared all #{params[:mode]} transmission entries"
 end

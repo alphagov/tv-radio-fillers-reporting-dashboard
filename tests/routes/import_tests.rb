@@ -9,48 +9,44 @@ class ImportTest < Test::Unit::TestCase
     Transmission.delete_all
   end
   
-  def test_tv_it_contains_upload_control
-    it_contains_upload_control("tv")
+  def test_tv_transmissions_it_contains_upload_control
+    it_contains_upload_control("tv", "transmissions")
   end
-  def test_radio_it_contains_upload_control
-    it_contains_upload_control("radio")
+  def test_radio_transmissions_it_contains_upload_control
+    it_contains_upload_control("radio", "transmissions")
   end
-  def it_contains_upload_control(mode)
-    get "/#{mode}/import"
+  def it_contains_upload_control(mode, upload_type)
+    get "/#{mode}/import/#{upload_type}"
     assert last_response.ok?
     assert last_response.body.include?('<input type="file"')
   end
   
-  def test_tv_import_post
+  def test_tv_transmissions_import_post
     Transmission.delete_all(type: 'tv')
     
-    post "/tv/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserTvTest::SAMPLE_FILE_FULL_PATH, "text/csv")
+    post "/tv/import/transmissions", "datafile" => Rack::Test::UploadedFile.new(CsvParserTvTest::SAMPLE_FILE_FULL_PATH, "text/csv")
     assert Transmission.where(type: 'tv').count == 10
   end
   
-  def test_radio_import_post
+  def test_radio_transmissions_import_post
     Transmission.delete_all(type: 'radio')
     
-    post "/radio/import", "datafile" => Rack::Test::UploadedFile.new(CsvParserRadioTest::SAMPLE_FILE_FULL_PATH, "text/csv")
+    post "/radio/import/transmissions", "datafile" => Rack::Test::UploadedFile.new(CsvParserRadioTest::SAMPLE_FILE_FULL_PATH, "text/csv")
     assert Transmission.where(type: 'radio').count == 12
   end
   
-  def test_tv_import_clear
+  def test_tv_transmissions_import_clear
     TransmissionTest.add_samples
     
-    post "/tv/import/clear"
+    post "/tv/import/transmissions/clear"
     assert_equal(0, Transmission.where(type: 'tv').count)
-    assert last_response.redirect?
-    assert last_response.location.include?('/tv/import')
   end
   
-  def test_radio_import_clear
+  def test_radio_transmissions_import_clear
     TransmissionTest.add_samples
     
-    post "/radio/import/clear"
+    post "/radio/import/transmissions/clear"
     assert_equal(0, Transmission.where(type: 'radio').count)
-    assert last_response.redirect?
-    assert last_response.location.include?('/radio/import')
   end
   
 end

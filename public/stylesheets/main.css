@@ -176,7 +176,20 @@ form.report-criteria .control-group label {
 form.report-criteria .controls {
   margin-left: 180px;
 }
-form.report-criteria input {
+form.report-criteria div.controls {
+  padding-top: 5px;
+}
+form.report-criteria .controls label {
+  float: none;
+  width: auto;
+  text-align: left;
+}
+form.report-criteria .controls label input {
+  vertical-align:top;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+form.report-criteria input.long {
   width: 200px;
 }
 form.report-criteria input.date-picker {

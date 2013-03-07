@@ -26,7 +26,7 @@ class FillerTest < Test::Unit::TestCase
       ).save
     Filler.new(
       :type => "tv",
-      :filler_name => " - DRIVING AROUND HORSES",
+      :filler_name => "DRIVING AROUND HORSES",
       :coi => "234",
       :client_name => "Department for Transport",
       :campaign_name => "ROAD SAFETY",

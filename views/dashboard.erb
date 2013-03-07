@@ -1,15 +1,10 @@
 <div class="container">
-  
-  <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
-  
+
+  <%= erb :"partials/breadcrumbs_heading", :locals => { :breadcrumbs => breadcrumbs, :mode => mode, :heading => 'Dashboard' } %>
+
   <div class="row">
-    <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Dashboard</h1>
     <a href="/<%= mode %>/import" class="button button-red right">Import data</a>
-    <a href="/<%= mode %>/transmissions" class="button right m-right">Transmissions</a>
-  </div>
-  
-  <div class="row centered">
-        
+    <a href="/<%= mode %>/transmissions" class="button right m-right">Transmissions</a>        
   </div>
   
   <div class="row">

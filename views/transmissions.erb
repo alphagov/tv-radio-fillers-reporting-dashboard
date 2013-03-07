@@ -1,10 +1,6 @@
 <div class="container">
-  
-  <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
-  
-  <div class="row">
-    <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Transmissions</h1>
-  </div>
+
+  <%= erb :"partials/breadcrumbs_heading", :locals => { :breadcrumbs => breadcrumbs, :mode => mode, :heading => 'Transmissions' } %>
 
   <div class="row">
     <form action="/<%= mode %>/transmissions" method="get" class="report-criteria">

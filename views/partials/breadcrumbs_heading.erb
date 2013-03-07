@@ -1,0 +1,3 @@
+<% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
+
+<%= erb :"partials/heading", :locals => { :mode => mode, :heading => heading } %>

@@ -1,11 +1,7 @@
 <div class="container">
-  
-  <% if (defined? breadcrumbs) != nil %><%= erb :"partials/breadcrumbs", :locals => { :breadcrumbs => breadcrumbs } %><% end %>
 
-  <div class="row">
-    <h1 class="inline"><img src="/images/<%= mode == "tv"? "tv-small.png" : "radio-small.png" %>" alt="<%= mode %>">Import</h1>
-  </div>
-  
+  <%= erb :"partials/breadcrumbs_heading", :locals => { :breadcrumbs => breadcrumbs, :mode => mode, :heading => 'Import' } %>
+
   <% if params[:error] %>
   <div class="row"><p class="flash"><%= params[:error] %></p></div>
   <% end %> 
@@ -30,5 +26,3 @@
     </form>
   </div>
 </div>
-  
-

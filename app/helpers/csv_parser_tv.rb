@@ -5,7 +5,7 @@ require_relative "../models/transmission.rb"
 class CsvParserTv < CsvParser
   include DateParser
   
-  CSV_PARSER_TV_LOG = "logs/CsvParserTv.log"
+  LOG_FILE = "logs/CsvParserTv.log"
 
   INSTRUCTION_TEXT =  'The TV CSV parser assumes the tv filler data comes in the following '\
                       'format: "DATE,TIME,TITLE,CHANNEL", '\
@@ -23,10 +23,6 @@ class CsvParserTv < CsvParser
      :station_name => row[3],
      :filler_name => row[2]
     )
-  end
-  
-  def parse_tv_file(file_full_path)
-    parse_file(file_full_path, CSV_PARSER_TV_LOG)
   end
 
 end

@@ -5,13 +5,18 @@ require "fileutils"
 
 class CsvParser
 
+  LOG_FILE = "logs/CsvParser.log"
+
+  def log_file_path
+    LOG_FILE
+  end
+
   def parse_row(row)
   end
   
-  protected
-  def parse_file(file_full_path, log_file_path)
-    FileUtils.rm(log_file_path) if File.exists?(log_file_path)
-    log = Logger.new(log_file_path)
+  def parse_file(file_full_path)
+    FileUtils.rm(LOG_FILE) if File.exists?(LOG_FILE)
+    log = Logger.new(LOG_FILE)
     log.level = Logger::DEBUG
 
     raise ArgumentError, "File does not exist", caller if !File.exists?(file_full_path)

@@ -53,7 +53,7 @@ class CsvParserTvTest < Test::Unit::TestCase
   end
   
   def self.load_sample_file
-    CsvParserTv.new.parse_tv_file(SAMPLE_FILE_FULL_PATH)
+    CsvParserTv.new.parse_file(SAMPLE_FILE_FULL_PATH)
   end
 
 end

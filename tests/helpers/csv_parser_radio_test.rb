@@ -54,7 +54,7 @@ class CsvParserRadioTest < Test::Unit::TestCase
   end
   
   def self.load_sample_file
-    CsvParserRadio.new.parse_radio_file(SAMPLE_FILE_FULL_PATH)
+    CsvParserRadio.new.parse_file(SAMPLE_FILE_FULL_PATH)
   end
 
 end

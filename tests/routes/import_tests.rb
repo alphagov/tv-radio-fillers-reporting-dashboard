@@ -39,7 +39,7 @@ class ImportTest < Test::Unit::TestCase
     TransmissionTest.add_samples
     
     post "/tv/import/clear"
-    assert Transmission.where(type: 'tv').count == 0
+    assert_equal(0, Transmission.where(type: 'tv').count)
     assert last_response.redirect?
     assert last_response.location.include?('/tv/import')
   end
@@ -48,7 +48,7 @@ class ImportTest < Test::Unit::TestCase
     TransmissionTest.add_samples
     
     post "/radio/import/clear"
-    assert Transmission.where(type: 'radio').count == 0
+    assert_equal(0, Transmission.where(type: 'radio').count)
     assert last_response.redirect?
     assert last_response.location.include?('/radio/import')
   end

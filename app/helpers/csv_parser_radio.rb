@@ -5,7 +5,7 @@ require_relative "../models/transmission.rb"
 class CsvParserRadio < CsvParser
   include DateParser
   
-  CSV_PARSER_RADIO_LOG = "logs/CsvParserRadio.log"
+  LOG_FILE = "logs/CsvParserRadio.log"
 
   INSTRUCTION_TEXT =  'The radio CSV parser assumes the radio filler data comes in the following '\
                       'format: "TITLE,CHANNEL,IMPACT,DATE,TIME", '\
@@ -25,9 +25,5 @@ class CsvParserRadio < CsvParser
      :filler_name => row[0]
     )
   end
-  
-  def parse_radio_file(file_full_path)
-    parse_file(file_full_path, CSV_PARSER_RADIO_LOG)
-  end
-  
+
 end

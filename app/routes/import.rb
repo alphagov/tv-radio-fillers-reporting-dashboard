@@ -1,10 +1,10 @@
 
 get '/:mode/import' do
-  erb :import, :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_radio([{ :label => "Import", :link => "/#{params[:mode]}/import"}]) }
+  erb :import, :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_by_mode(params[:mode], [{ :label => "Import", :link => "/#{params[:mode]}/import"}]) }
 end
 
 get '/:mode/import/transmissions' do
-  erb :"import/import_transmissions", :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_radio([{ :label => "Import", :link => "/#{params[:mode]}/import"}, { :label => "Transmissions", :link => "/#{params[:mode]}/import/transmissions"}]) }
+  erb :"import/import_transmissions", :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_by_mode(params[:mode], [{ :label => "Import", :link => "/#{params[:mode]}/import"}, { :label => "Transmissions", :link => "/#{params[:mode]}/import/transmissions"}]) }
 end
 
 post '/:mode/import/transmissions' do

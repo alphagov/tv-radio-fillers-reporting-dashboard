@@ -20,6 +20,13 @@ class BreadcrumbsTest < Test::Unit::TestCase
     assert breadcrumbs[1][:link] == '/test1'
   end
   
+  def test_get_breadcrumbs_by_mode
+    breadcrumbs_tv = @object.get_breadcrumbs_by_mode('tv')
+    assert breadcrumbs_tv[1][:link] == '/tv'
+    breadcrumbs_radio = @object.get_breadcrumbs_by_mode('radio')
+    assert breadcrumbs_radio[1][:link] == '/radio'
+  end
+  
   def test_get_breadcrumbs_tv
     breadcrumbs = @object.get_breadcrumbs_tv
     assert breadcrumbs[1][:label] == 'TV'

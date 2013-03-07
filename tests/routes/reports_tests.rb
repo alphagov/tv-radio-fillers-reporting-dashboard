@@ -15,7 +15,6 @@ class ReportsTest < Test::Unit::TestCase
   
   def has_criteria(mode)
     get "/#{mode}/reports"
-    assert last_response.body.include?('name="filler_name"')
-    assert last_response.body.include?('name="station_name"')
+    assert last_response.body.include?('name="report_type"')
   end
 end

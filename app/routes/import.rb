@@ -4,7 +4,8 @@ get '/:mode/import' do
 end
 
 get '/:mode/import/transmissions' do
-  erb :"import/import_transmissions", :locals => { :mode => params[:mode], :breadcrumbs => get_breadcrumbs_by_mode(params[:mode], [{ :label => "Import", :link => "/#{params[:mode]}/import"}, { :label => "Transmissions", :link => "/#{params[:mode]}/import/transmissions"}]) }
+  instructions = params[:mode] == 'tv' ? CsvParserTv::INSTRUCTION_TEXT : CsvParserRadio::INSTRUCTION_TEXT
+  erb :"import/import_csv", :locals => { :mode => params[:mode], :upload_type => 'Transmissions', :instructions => instructions, :breadcrumbs => get_breadcrumbs_by_mode(params[:mode], [{ :label => "Import", :link => "/#{params[:mode]}/import"}, { :label => "Transmissions", :link => "/#{params[:mode]}/import/transmissions"}]) }
 end
 
 post '/:mode/import/transmissions' do

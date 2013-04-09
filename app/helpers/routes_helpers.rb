@@ -1,21 +1,19 @@
 require 'sinatra'
 require 'addressable/uri'
+require 'date'
+require 'CGI'
 require_relative '../../app/models/transmission.rb'
 
 module RoutesHelpers
-
-  REPORTS = [
-    { :name => "2B: Client Reports, Transmission by Station and Time of Day"  , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "2C: Client Reports, Transmission by Time of Day"              , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "3A: Client Reports, Transmission by Filler and Station"       , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "4A: Summary Reports, Client by Station Type and Time of Day"  , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "4B: Summary Reports, Client by Station Type, Theme and Filler", :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "5B: Top Terrestial Transmissions"                             , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "M1: Clearance Expiry List"                                    , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "Client Report Set per Client"                                 , :value => "3a_client_reports_transmission_by_filler_and_station" },
-    { :name => "Annual Tracking by Client"                                    , :value => "3a_client_reports_transmission_by_filler_and_station" }
-  ]
-
+  
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+  
+  def u(url_text)
+    CGI.escape(url_text)
+  end
+  
   def is_param_not_nil_empty(params, param_name)
     !params.nil? && !params[param_name].nil? && params[param_name] != ''
   end
@@ -63,4 +61,21 @@ module RoutesHelpers
       :results => criteria.paginate(:page => page, :limit => page_size)
     }
   end
+  
+  def get_previous_month_start_date_string
+    (DateTime.new(DateTime.now.year, DateTime.now.month-1, 1)).strftime("%d/%m/%Y")
+  end
+  
+  def get_previous_month_end_date_string
+    (DateTime.new(DateTime.now.year, DateTime.now.month, 1) - 1.0).strftime("%d/%m/%Y")
+  end
+  
+  def get_previous_year_start_date_string
+    "01/01/#{DateTime.now.year-1}"
+  end
+  
+  def get_previous_year_end_date_string
+    "31/12/#{DateTime.now.year-1}"
+  end
+  
 end

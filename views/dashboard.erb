@@ -8,7 +8,7 @@
   </div>
   
   <div class="row">
-    <h2 class="inline">Reports</h2>
+    <h2 class="inline">Quick Reports</h2>
     <a href="/<%= mode %>/reports" class="button right">Generate Reports</a>
     <table id="report-table" class="data-table" width="100%" cellpadding="0" cellspacing="0" border="0">
       <thead>
@@ -19,11 +19,11 @@
         </tr>
       </thead>
       <tbody>
-        <% REPORTS.each do |report| %>
+        <% quick_reports.each do |report| %>
         <tr>
           <td><%= report[:name] %></td>
-          <td><a href="#">previous month</a></td>
-          <td><a href="#">previous year</a></td>
+          <td><a href="/tv/generate-report?report_type=<%= report[:value] %>&from_date=<%= u get_previous_month_start_date_string %>&to_date=<%= u get_previous_month_end_date_string %>">previous month</a></td>
+          <td><a href="/tv/generate-report?report_type=<%= report[:value] %>&from_date=<%= u get_previous_year_start_date_string %>&to_date=<%= u get_previous_year_end_date_string %>">previous year</a></td>
         </tr>
         <% end %>
       </tbody>

@@ -11,7 +11,7 @@
         <div class="control-group">
           <label>Report Type</label>
           <div class="controls">
-            <% REPORTS.each do |report| %>
+            <% reports.each do |report| %>
             <label><input type="radio" name="report_type" value="<%= report[:value] %>"><%= report[:name] %></label><br/>
             <% end %>
           </div>

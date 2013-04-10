@@ -24,7 +24,7 @@ class Report3aTest < Test::Unit::TestCase
   end
 
   def test_generate
-    mode = 'tv'
+    mode = 'radio'
     from_date = DateTime.new(2012, 1, 1)
     to_date = DateTime.new(2013, 1, 1)
     report = Report3a.new(mode, from_date, to_date)
@@ -96,7 +96,8 @@ class Report3aTest < Test::Unit::TestCase
             :date => date,
             :time_of_day => "00:01", 
             :filler_name => filler.filler_name, 
-            :station_name => station.station_name
+            :station_name => station.station_name,
+            :spot_value => 1.5
           ).save
         end
       end

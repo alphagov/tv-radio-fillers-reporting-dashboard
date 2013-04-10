@@ -17,4 +17,8 @@ class Report
     }
   end
   
+  def get_distinct_values_from_hash_array_for_key(hash_array, key)
+    hash_array.inject([]) { |result, hash| result << hash[key] unless result.include?(hash[key]); result }
+  end
+  
 end

@@ -17,7 +17,7 @@ class Report
     }
   end
   
-  def get_distinct_values_from_hash_array_for_key(hash_array, selector_proc)
+  def self.get_distinct_values_from_hash_array_for_key(hash_array, selector_proc)
     hash_array.inject([]) { |result, hash| result << selector_proc.call(hash) unless result.include?(selector_proc.call(hash)); result }
   end
   
@@ -46,5 +46,21 @@ class Report
     }
     
     Transmission.where(type: mode, :date.gte => from_date, :date.lte => to_date).map_reduce(map, reduce).out(inline: true)
+  end
+  
+  def self.get_stations_for_transmissions_summary(transmissions_summary, additional_transmissions_summary = nil)
+    station_name_selector = Proc.new { |hash| hash["_id"]["station_name"] }
+    station_names = get_distinct_values_from_hash_array_for_key(transmissions_summary, station_name_selector)
+    station_names += get_distinct_values_from_hash_array_for_key(additional_transmissions_summary, station_name_selector) unless additional_transmissions_summary.nil?
+    
+    Station.in(station_name: station_names)
+  end
+  
+  def self.get_fillers_for_transmissions_summary(transmissions_summary, additional_transmissions_summary = nil)
+    filler_name_selector = Proc.new { |hash| hash["_id"]["filler_name"] }
+    filler_names = get_distinct_values_from_hash_array_for_key(transmissions_summary, filler_name_selector)
+    filler_names += get_distinct_values_from_hash_array_for_key(additional_transmissions_summary, filler_name_selector) unless additional_transmissions_summary.nil?
+    
+    Filler.in(filler_name: filler_names)
   end
 end

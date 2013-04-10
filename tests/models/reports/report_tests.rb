@@ -34,10 +34,9 @@ class ReportTest < Test::Unit::TestCase
   end
   
   def test_get_distinct_values_from_hash_array_for_key
-    report = Report.new('tv', DateTime.new(2012, 1, 1), DateTime.new(2013, 1, 1))
     hash_array = [{ :a => "1", :b => "1" }, { :a => "2", :b => "2" }, { :a => "1", :b => "3" } ]
     
-    assert_equal(2, report.get_distinct_values_from_hash_array_for_key(hash_array, Proc.new { |hash| hash[:a] }).length)
+    assert_equal(2, Report.get_distinct_values_from_hash_array_for_key(hash_array, Proc.new { |hash| hash[:a] }).length)
   end
   
   def test_get_transmissions_summary_for_period_data

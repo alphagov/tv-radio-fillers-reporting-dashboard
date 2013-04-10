@@ -17,8 +17,8 @@ class Report
     }
   end
   
-  def get_distinct_values_from_hash_array_for_key(hash_array, key)
-    hash_array.inject([]) { |result, hash| result << hash[key] unless result.include?(hash[key]); result }
+  def get_distinct_values_from_hash_array_for_key(hash_array, selector_proc)
+    hash_array.inject([]) { |result, hash| result << selector_proc.call(hash) unless result.include?(selector_proc.call(hash)); result }
   end
   
   def self.get_transmissions_summary_for_period_data(mode, from_date, to_date)

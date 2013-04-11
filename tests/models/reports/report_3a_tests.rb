@@ -31,8 +31,10 @@ class Report3aTest < Test::Unit::TestCase
     report = Report3a.new(mode, from_date, to_date)
 
     data = report.generate
-
+    puts "Report3a data: #{data}"
+    
     assert(!data[:station_types].nil?, 'station_types should not be nil')
+    assert_equal(2, data[:station_types].length)
   end
   
 end

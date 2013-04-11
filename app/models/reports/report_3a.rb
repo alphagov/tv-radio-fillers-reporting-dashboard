@@ -16,26 +16,19 @@ class Report3a < Report
     previous_period_transmissions = Report.get_transmissions_summary_for_period_data(mode, previous_period_from_date, previous_period_to_date)
     
     if (current_transmissions.count != 0 || previous_period_transmissions.count != 0)
-      all_transmissions_station_station_name_to_station = Report.get_station_name_to_station_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
-      all_transmissions_filler_filler_name_to_filler = Report.get_filler_name_to_filler_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
+      station_name_to_station_map = Report.get_station_name_to_station_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
+      filler_name_to_filler_map = Report.get_filler_name_to_filler_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
       
-      if (all_transmissions_station_station_name_to_station.keys.length != 0 && 
-        all_transmissions_filler_filler_name_to_filler.keys.length != 0)
+      if (station_name_to_station_map.keys.length != 0 && 
+        filler_name_to_filler_map.keys.length != 0)
         report_data = current_transmissions.collect do |transmission|
-          station = all_transmissions_station_station_name_to_station[transmission["_id"]["station_name"]]
-          filler = all_transmissions_filler_filler_name_to_filler[transmission["_id"]["filler_name"]]
           {
-            :station_type => station[:station_type],
-            :client_name => filler[:client_name],
-            :campaign_name => filler[:campaign_name],
-            :filler_name => filler[:filler_name],
-            :coi => filler[:coi],
-            :length => filler[:length],
-            :station_name => station[:station_name],
             :previous_period => 0,
             :current_period => transmission["value"]["count"],
             :spot_value => transmission["value"]["spot_value"]
           }
+          .merge(Report.get_hash_station_data_for_station_name(station_name_to_station_map, transmission["_id"]["station_name"]))
+          .merge(Report.get_hash_filler_data_for_filler_name(filler_name_to_filler_map, transmission["_id"]["filler_name"]))
         end
         
         previous_period_transmissions.each do |previous_period_transmission|
@@ -47,7 +40,13 @@ class Report3a < Report
           if !report_data_current_transmission.nil?
             report_data_current_transmission[:previous_period] = previous_period_transmission["value"]["count"]
           else
-            #TODO build previous trans block
+            report_data << {
+              :previous_period => previous_period_transmission["value"]["count"],
+              :current_period => 0,
+              :spot_value => 0
+            }
+            .merge(Report.get_hash_station_data_for_station_name(station_name_to_station_map, previous_period_transmission["_id"]["station_name"]))
+            .merge(Report.get_hash_filler_data_for_filler_name(filler_name_to_filler_map, previous_period_transmission["_id"]["filler_name"]))
           end
         end
         

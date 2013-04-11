@@ -79,4 +79,21 @@ class Report
     
     Filler.in(filler_name: filler_names)
   end
+  
+  def self.get_hash_station_data_for_station_name(station_name_to_station_map, station_name)
+    {
+      :station_type => station_name_to_station_map[station_name][:station_type],
+      :station_name => station_name_to_station_map[station_name][:station_name]
+    }
+  end
+  
+  def self.get_hash_filler_data_for_filler_name(filler_name_to_filler_map, filler_name)
+    {
+      :client_name => filler_name_to_filler_map[filler_name][:client_name],
+      :campaign_name => filler_name_to_filler_map[filler_name][:campaign_name],
+      :filler_name =>filler_name_to_filler_map[filler_name][:filler_name],
+      :coi => filler_name_to_filler_map[filler_name][:coi],
+      :length => filler_name_to_filler_map[filler_name][:length]
+    }
+  end
 end

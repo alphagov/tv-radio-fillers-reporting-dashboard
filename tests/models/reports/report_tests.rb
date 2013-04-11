@@ -91,6 +91,29 @@ class ReportTest < Test::Unit::TestCase
     assert(fillers.detect { |f| f[:filler_name] == "Smoking & Pregnancy - Reasons - Partners" }, "could not find filler")
   end
   
+  def test_get_hash_station_data_for_station_name
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2012, 1, 1), DateTime.new(2013, 1, 1))
+    station_name_to_station_map = Report.get_station_name_to_station_map_for_transmissions_summary(transmissions_summary)
+    
+    hash_station_data = Report.get_hash_station_data_for_station_name(station_name_to_station_map, "Affinity Cambridge")
+    
+    assert_equal("Affinity Cambridge", hash_station_data[:station_name])
+    assert_equal("Exclusively Online", hash_station_data[:station_type])
+  end
+  
+  def test_get_hash_filler_data_for_filler_name
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2012, 1, 1), DateTime.new(2013, 1, 1))
+    filler_name_to_filler_map = Report.get_filler_name_to_filler_map_for_transmissions_summary(transmissions_summary)
+    
+    hash_filler_data = Report.get_hash_filler_data_for_filler_name(filler_name_to_filler_map, "Smoking & Pregnancy - Reasons - Partners")
+
+    assert_equal("Department of Health", hash_filler_data[:client_name])
+    assert_equal("Stop Smoking", hash_filler_data[:campaign_name])
+    assert_equal("Smoking & Pregnancy - Reasons - Partners", hash_filler_data[:filler_name])
+    assert_equal("35", hash_filler_data[:coi])
+    assert_equal(40, hash_filler_data[:length])
+  end
+  
   def test_generate
     mode = 'tv'
     from_date = DateTime.new(2012, 1, 1)

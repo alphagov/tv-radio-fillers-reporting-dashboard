@@ -37,4 +37,17 @@ class Report3aTest < Test::Unit::TestCase
     assert_equal(2, data[:station_types].length)
   end
   
+  def test_generate_1_previous_period
+    mode = 'radio'
+    from_date = DateTime.new(2010, 1, 1)
+    to_date = DateTime.new(2011, 1, 10)
+    report = Report3a.new(mode, from_date, to_date)
+
+    data = report.generate
+    puts "Report3a data: #{data}"
+    
+    assert(!data[:station_types].nil?, 'station_types should not be nil')
+    assert_equal(2, data[:station_types].length)
+  end
+  
 end

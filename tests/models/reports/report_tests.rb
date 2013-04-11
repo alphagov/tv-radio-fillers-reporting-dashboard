@@ -55,6 +55,42 @@ class ReportTest < Test::Unit::TestCase
     assert_equal(9, count)
   end
   
+  def test_get_station_name_to_station_map_for_transmissions_summary
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2012, 1, 1), DateTime.new(2013, 1, 1))
+    station_name_to_station_map = Report.get_station_name_to_station_map_for_transmissions_summary(transmissions_summary)
+    
+    assert_equal(3, station_name_to_station_map.keys.length)
+    assert_equal("Affinity Cambridge", station_name_to_station_map["Affinity Cambridge"][:station_name])
+    assert_equal("Exclusively Online", station_name_to_station_map["Affinity Cambridge"][:station_type])
+  end
+  
+  def test_get_filler_name_to_filler_map_for_transmissions_summary
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2012, 1, 1), DateTime.new(2013, 1, 1))
+    filler_name_to_filler_map = Report.get_filler_name_to_filler_map_for_transmissions_summary(transmissions_summary)
+    
+    assert_equal(3, filler_name_to_filler_map.keys.length)
+    assert_equal("Smoking & Pregnancy - Reasons - Partners", filler_name_to_filler_map["Smoking & Pregnancy - Reasons - Partners"][:filler_name])
+    assert_equal("Department of Health", filler_name_to_filler_map["Smoking & Pregnancy - Reasons - Partners"][:client_name])
+    assert_equal("Stop Smoking", filler_name_to_filler_map["Smoking & Pregnancy - Reasons - Partners"][:campaign_name])
+  end
+  
+  def test_get_stations_for_transmissions_summary
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2010, 1, 1), DateTime.new(2011, 1, 1))
+    previous_period_transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2009, 1, 1), DateTime.new(2010, 1, 1))
+    stations = Report.get_stations_for_transmissions_summary(transmissions_summary, previous_period_transmissions_summary)
+    
+    assert_equal(1, stations.length)
+    assert(stations.detect { |s| s[:station_name] == "Affinity Cambridge" }, "could not find station")
+  end
+  
+  def test_get_fillers_for_transmissions_summary
+    transmissions_summary = Report.get_transmissions_summary_for_period_data('radio', DateTime.new(2010, 1, 1), DateTime.new(2011, 1, 1))
+    fillers = Report.get_fillers_for_transmissions_summary(transmissions_summary)
+    
+    assert_equal(1, fillers.length)
+    assert(fillers.detect { |f| f[:filler_name] == "Smoking & Pregnancy - Reasons - Partners" }, "could not find filler")
+  end
+  
   def test_generate
     mode = 'tv'
     from_date = DateTime.new(2012, 1, 1)
@@ -137,6 +173,15 @@ class ReportTest < Test::Unit::TestCase
         end
       end
     end
+    
+    Transmission.new(
+      :type => "radio", 
+      :date => Date.new(2010,1,3),
+      :time_of_day => "00:01", 
+      :filler_name => fillers[0].filler_name, 
+      :station_name => stations[0].station_name,
+      :spot_value => 1.5
+    ).save
     
   end
   

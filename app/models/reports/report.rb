@@ -48,6 +48,22 @@ class Report
     Transmission.where(type: mode, :date.gte => from_date, :date.lte => to_date).map_reduce(map, reduce).out(inline: true)
   end
   
+  def self.get_station_name_to_station_map_for_transmissions_summary(transmissions_summary, additional_transmissions_summary = nil)
+    all_transmissions_stations = Report.get_stations_for_transmissions_summary(transmissions_summary, additional_transmissions_summary)
+    all_transmissions_station_station_name_to_station = {}
+    all_transmissions_stations.each { |s| all_transmissions_station_station_name_to_station[s[:station_name]] = s }
+    
+    all_transmissions_station_station_name_to_station
+  end
+  
+  def self.get_filler_name_to_filler_map_for_transmissions_summary(transmissions_summary, additional_transmissions_summary = nil)
+    all_transmissions_fillers = Report.get_fillers_for_transmissions_summary(transmissions_summary, additional_transmissions_summary)
+    all_transmissions_filler_filler_name_to_filler = {} 
+    all_transmissions_fillers.each { |f| all_transmissions_filler_filler_name_to_filler[f[:filler_name]] = f }
+    
+    all_transmissions_filler_filler_name_to_filler
+  end
+  
   def self.get_stations_for_transmissions_summary(transmissions_summary, additional_transmissions_summary = nil)
     station_name_selector = Proc.new { |hash| hash["_id"]["station_name"] }
     station_names = get_distinct_values_from_hash_array_for_key(transmissions_summary, station_name_selector)

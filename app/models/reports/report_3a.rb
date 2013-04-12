@@ -55,7 +55,11 @@ class Report3a < Report
         grouped_station_type.each_key do |key_station_type| 
           grouped_station_type_client_name = grouped_station_type[key_station_type].group_by { |d| d[:client_name] }
           grouped_station_type_client_name.each_key do |key_client_name|
-            grouped_station_type_client_name[key_client_name] = grouped_station_type_client_name[key_client_name].group_by { |d| d[:campaign_name] }
+            grouped_station_type_client_name_campaign_name = grouped_station_type_client_name[key_client_name].group_by { |d| d[:campaign_name] }
+            grouped_station_type_client_name_campaign_name.each_key do |key_campaign_name|
+              grouped_station_type_client_name_campaign_name[key_campaign_name] = grouped_station_type_client_name_campaign_name[key_campaign_name].group_by { |d| d[:filler_name] }  
+            end
+            grouped_station_type_client_name[key_client_name] = grouped_station_type_client_name_campaign_name
           end
           grouped_station_type[key_station_type] = grouped_station_type_client_name
         end

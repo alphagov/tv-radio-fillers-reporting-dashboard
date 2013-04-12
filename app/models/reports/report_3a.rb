@@ -15,7 +15,8 @@ class Report3a < Report
     current_transmissions = Report.get_transmissions_summary_for_period_data(mode, from_date, to_date)
     previous_period_transmissions = Report.get_transmissions_summary_for_period_data(mode, previous_period_from_date, previous_period_to_date)
     
-    if (current_transmissions.count != 0 || previous_period_transmissions.count != 0)
+    if ((!current_transmissions.nil? && current_transmissions.count != 0) || 
+      (!previous_period_transmissions.nil? && previous_period_transmissions.count != 0))
       station_name_to_station_map = Report.get_station_name_to_station_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
       filler_name_to_filler_map = Report.get_filler_name_to_filler_map_for_transmissions_summary(current_transmissions, previous_period_transmissions)
       

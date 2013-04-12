@@ -3,6 +3,8 @@ require 'date'
 class Report
   attr_accessor :mode, :from_date, :to_date
   
+  REPORT_DATE_STRING_FORMAT = '%d %B %Y'
+  
   def initialize (mode, from_date, to_date)  
     @mode = mode
     @from_date = from_date
@@ -12,8 +14,8 @@ class Report
   def generate
     {
       :mode => mode,
-      :from_date => @from_date.strftime('%d %B %Y '),
-      :to_date => @to_date.strftime('%d %B %Y ')
+      :from_date => @from_date.strftime(REPORT_DATE_STRING_FORMAT),
+      :to_date => @to_date.strftime(REPORT_DATE_STRING_FORMAT)
     }
   end
   

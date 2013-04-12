@@ -116,6 +116,7 @@ class ReportTest < Test::Unit::TestCase
   
   def test_generate
     mode = 'tv'
+    date_string_format = '%d %B %Y'
     from_date = DateTime.new(2012, 1, 1)
     to_date = DateTime.new(2013, 1, 1)
     report = Report.new(mode, from_date, to_date)
@@ -124,8 +125,8 @@ class ReportTest < Test::Unit::TestCase
 
     assert(!data.nil?, 'Data is nil')
     assert_equal(mode, data[:mode])
-    assert_equal(from_date.strftime('%d %B %Y '), data[:from_date])
-    assert_equal(to_date.strftime('%d %B %Y '), data[:to_date])
+    assert_equal(from_date.strftime(date_string_format), data[:from_date])
+    assert_equal(to_date.strftime(date_string_format), data[:to_date])
   end
   
   def self.add_sample_data

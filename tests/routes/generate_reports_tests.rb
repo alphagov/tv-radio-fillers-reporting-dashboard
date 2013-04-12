@@ -1,12 +1,15 @@
 require_relative '../test_helper.rb'
-require_relative '../helpers/csv_parser_radio_test.rb'
-require_relative '../helpers/csv_parser_tv_test.rb'
 
 class ReportsTest < Test::Unit::TestCase
   
-  def generate_reports_it_ok
-    it_ok('/tv/generate-report?report_type=3a_client_reports_transmission_by_filler_and_station&from_date=01%2F01%2F2012&to_date=01%2F01%2F2013')
-    it_ok('/radio/generate-report?report_type=3a_client_reports_transmission_by_filler_and_station&from_date=01%2F01%2F2012&to_date=01%2F01%2F2013')
+  def test_generate_reports_report3a_no_data
+    it_ok('/tv/generate-report?report_type=3a_client_reports_transmission_by_filler_and_station&from_date=01%2F01%2F2000&to_date=01%2F01%2F2001')
+    assert last_response.body.include?('TV Fillers Transmission Report'), "Does not include report header"
+    assert last_response.body.include?('No transmissions found'), "Does not include no data found message"
+    
+    it_ok('/radio/generate-report?report_type=3a_client_reports_transmission_by_filler_and_station&from_date=01%2F01%2F2000&to_date=01%2F01%2F2001')
+    assert last_response.body.include?('Radio Fillers Transmission Report'), "Does not include report header"
+    assert last_response.body.include?('No transmissions found'), "Does not include no data found message"
   end
 
 end

@@ -1,5 +1,12 @@
 <div class="container">
 
   <%= erb :"partials/breadcrumbs_heading", :locals => { :breadcrumbs => breadcrumbs, :mode => mode, :heading => 'Report' } %>
-
+  
+  <div class="row">
+    <% if !report_data.nil? %>
+    <%= erb :"partials/reports/report_3a", :locals => { :mode => mode, :report_data => report_data } %>
+    <% else %>
+    <h3>No report generated</h3> 
+    <% end %>
+  </div>
 </div>

@@ -1,0 +1,5 @@
+<h2><%= mode == "tv"? "TV" : "Radio" %> Fillers Transmission Report</h2>
+<% if !report_data.nil? && report_data.has_key?(:station_types) && report_data[:station_types].keys.length > 0 %>
+<% else %>
+<p>No transmissions found</p>
+<% end %>

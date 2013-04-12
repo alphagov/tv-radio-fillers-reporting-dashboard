@@ -77,4 +77,11 @@ class RoutesHelpersTest < Test::Unit::TestCase
     assert_equal("31/12/#{DateTime.now.year-1}", @object.get_previous_year_end_date_string, "previous year end string")
   end
 
+  def test_get_report_data_empty
+    report_data = @object.get_report_data('tv', { :report_type => '3a_client_reports_transmission_by_filler_and_station', :from_date => Date.new(1999,2,2).strftime('%d/%m/%Y'), :to_date => Date.new(1999,2,4).strftime('%d/%m/%Y')})
+
+    assert !report_data.nil?, "not nil"
+    assert report_data[:mode] == 'tv', "not tv mode"
+  end
+
 end

@@ -3,6 +3,7 @@ require 'addressable/uri'
 require 'date'
 require 'CGI'
 require_relative '../../app/models/transmission.rb'
+require_relative '../../app/models/reports/report_3a.rb'
 
 module RoutesHelpers
   
@@ -77,5 +78,16 @@ module RoutesHelpers
   def get_previous_year_end_date_string
     "31/12/#{DateTime.now.year-1}"
   end
-  
+
+  def get_report_data(mode, params)
+    begin
+      from_date = params[:from_date].nil? ? nil : Date.strptime(params[:from_date], '%d/%m/%Y')
+      to_date = params[:to_date].nil? ? nil : Date.strptime(params[:to_date], '%d/%m/%Y')
+    rescue ArgumentError
+      from_date = nil
+      to_date = nil
+    end
+    
+    report_data = from_date.nil? || to_date.nil? ? nil : Report3a.new(mode, from_date, to_date).generate
+  end
 end

@@ -14,9 +14,15 @@ get '/api/:mode/download-csv' do
   end
 end
 
-get  '/api/:mode/download-json' do
+get '/api/:mode/download-json' do
   content_type :json
   results = query_for_params(params[:mode], params)
   
   results.to_json
+end
+
+get '/api/:mode/generate-report' do
+  content_type :json
+  
+  get_report_data(params[:mode], params).to_json
 end

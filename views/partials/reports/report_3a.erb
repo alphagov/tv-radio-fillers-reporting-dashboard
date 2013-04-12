@@ -1,15 +1,17 @@
 <div class="report report_3a">
 <% if !report_data.nil? && report_data.has_key?(:station_types) && report_data[:station_types].keys.length > 0 %>
 <h2><%= mode == "tv"? "TV" : "Radio" %> Fillers Transmission Report</h2>
+<div>
+  <div><label class="label">From: </label><label><%= report_data[:from_date] %></label></div>
+  <div><label class="label">To: </label><label><%= report_data[:to_date] %></label></div>
+</div>
+
   <% report_data[:station_types].each_pair do |station_type, station_type_data| %>
 <div class="page_break">
   <h3><%= station_type %></h3>
     <% station_type_data.each_pair do |client_name, client_name_data| %>
   <h4><%= client_name %></h4>
-  <div>
-    <div><label class="label">From: </label><label><%= report_data[:from_date] %></label></div>
-    <div><label class="label">To: </label><label><%= report_data[:to_date] %></label></div>
-  </div>
+
   <table class="report-table">
     <thead>
       <th>Prod Year</th>
@@ -50,6 +52,13 @@
     <% end %>
 </div>
   <% end %>
+  
+<div class="footer">
+  Details: Department Report
+  <p>
+    This the number of transmissions and the airtime value for each filler by station, and compares the transmissions with the same period in the previous year.
+  </p>
+</div>
 <% else %>
 <p>No transmissions found</p>
 <% end %>

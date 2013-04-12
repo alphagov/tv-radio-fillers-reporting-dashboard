@@ -1,5 +1,56 @@
-<h2><%= mode == "tv"? "TV" : "Radio" %> Fillers Transmission Report</h2>
+<div class="report report_3a">
 <% if !report_data.nil? && report_data.has_key?(:station_types) && report_data[:station_types].keys.length > 0 %>
+<h2><%= mode == "tv"? "TV" : "Radio" %> Fillers Transmission Report</h2>
+  <% report_data[:station_types].each_pair do |station_type, station_type_data| %>
+<div class="page_break">
+  <h3><%= station_type %></h3>
+    <% station_type_data.each_pair do |client_name, client_name_data| %>
+  <h4><%= client_name %></h4>
+  <div>
+    <div><label class="label">From: </label><label><%= report_data[:from_date] %></label></div>
+    <div><label class="label">To: </label><label><%= report_data[:to_date] %></label></div>
+  </div>
+  <table class="report-table">
+    <thead>
+      <th>Prod Year</th>
+      <th>COI Ref</th>
+      <th>Length</th>
+      <th>Title</th>
+      <th class="numeric">Previous Period</th>
+      <th class="numeric">Current Period</th>
+      <th class="numeric">Value</th>
+    </thead>
+    <tbody>
+        <% client_name_data.each_pair do |campaign_name, campaign_name_data| %>
+      <tr><td colspan="7"><%= campaign_name %></td></tr>
+          <% campaign_name_data.each_pair do |filler_name, filler_name_data| %>
+        <tr>
+          <td></td>
+          <td><%= filler_name_data.first[:coi] %></td>
+          <td><%= filler_name_data.first[:length] %></td>
+          <td colspan="4"><%= filler_name %></td>
+        </tr>
+        <tr>
+          <td colspan="1"></td>
+          <td colspan="6">Stations:</td>
+        </tr> 
+          <% filler_name_data.each do |transmission_data| %>
+        <tr>
+          <td colspan="2"></td>
+          <td colspan="2"><%= transmission_data[:station_name] %></td>
+          <td class="numeric"><%= "%.0f" % transmission_data[:previous_period] %></td>
+          <td class="numeric"><%= "%.0f" % transmission_data[:current_period] %></td>
+          <td class="numeric">£<%= "%.2f" % transmission_data[:spot_value] %></td>
+        </tr> 
+            <% end %>
+          <% end %>
+        <% end %>
+    </tbody>
+  </table>
+    <% end %>
+</div>
+  <% end %>
 <% else %>
 <p>No transmissions found</p>
 <% end %>
+</div>
